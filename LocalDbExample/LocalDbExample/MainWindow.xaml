@@ -1,0 +1,21 @@
+﻿<Window x:Class="LocalDbExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LocalDbExample"
+        mc:Ignorable="d"
+        Title="Dapper+FastCrud Sample" Height="350" Width="825">
+    <DockPanel Margin="10">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" >
+        <Button Padding="20,2" Content="1.接続" HorizontalAlignment="Left" Click="btnDbInfo_Click"/>
+        <Button Padding="20,2" Content="2.テーブル作成" HorizontalAlignment="Left" Click="btnCreate_Click"/>
+        <Button Padding="20,2" Content="3.データ投入" HorizontalAlignment="Left" Click="btnInsert_Click"/>
+        <Button Padding="20,2" Content="4.レコード検索" HorizontalAlignment="Left" Click="btnSearch_Click"/>
+        <Button Padding="20,2" Content="5.データ更新" HorizontalAlignment="Left" Click="btnUpdate_Click"/>
+        <Button Padding="20,2" Content="6.データ削除" HorizontalAlignment="Left" Click="btnDelete_Click"/>
+        <Button Padding="20,2" Content="7.テーブル削除" HorizontalAlignment="Left" Click="btnDrop_Click"/>
+</StackPanel>
+<TextBox x:Name="TextBoxLogArea" ScrollViewer.CanContentScroll="True" FontFamily="MS Gothic"/>
+    </DockPanel>
+</Window>
