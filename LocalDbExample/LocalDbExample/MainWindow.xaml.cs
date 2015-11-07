@@ -231,6 +231,78 @@ create table Employees (
                 Log(ex.ToString());
             }
         }
+        
+        /// <summary>
+        /// 日本語での検索
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch2_Click(object sender, RoutedEventArgs e)
+        {
+            LogClear();
+            try
+            {
+                int i = 0;
+                // Dapper
+                using (var conn = ConnectionManager.GetConnection())
+                {
+                    var start = DateTime.Now;
+                    foreach (var emp in conn.Query<Entity.Models.Employee>("select * from employees where name=@Name", new { Name = "山田太郎" }))
+                    {
+                        if (i++ % 100 == 0) Log("{0}", emp.ToString());
+                    }
+                    var finish = DateTime.Now;
+                    Log($"count = {i}");
+                    Log("Dapper# start:{0} finish:{1} ({2})", start, finish, finish - start);
+                }
+
+                i = 0;
+                // Dapper+FastCrud（プレースホルダマッピングを使用）
+                using (var conn = ConnectionManager.GetConnection())
+                {
+                    var start = DateTime.Now;
+                    foreach (var emp in conn.Find<Entity.Models.Employee>(whereClause: $"name=@Name", queryParameters: new { Name = "山田太郎" }))
+                    {
+                        if (i++ % 100 == 0) Log("{0}", emp.ToString());
+                    }
+                    var finish = DateTime.Now;
+                    Log($"count = {i}");
+                    Log("FC1# start:{0} finish:{1} ({2})", start, finish, finish - start);
+                }
+
+                i = 0;
+                // Dapper+FastCrud（SQL文字列だけで検索）
+                using (var conn = ConnectionManager.GetConnection())
+                {
+                    var start = DateTime.Now;
+                    foreach (var emp in conn.Find<Entity.Models.Employee>(whereClause:$"name=N'山田太郎'")) //　SQL Serverでは文字列リテラルの前にNが必要
+                    {
+                        if (i++ % 100 == 0) Log("{0}", emp.ToString());
+                    }
+                    var finish = DateTime.Now;
+                    Log($"count = {i}");
+                    Log("FC2# start:{0} finish:{1} ({2})", start, finish, finish - start);
+                }
+
+                i = 0;
+                // Microsoft EntityFramework
+                using (var db = new Entity.EFModels.Model1())
+                {
+                    var start = DateTime.Now;
+                    foreach (var emp in from t1 in db.Employees where t1.name == "山田太郎" select t1)
+                    {
+                        if (i++ % 100 == 0) Log($"id={emp.id}, name={emp.name}, department_id={emp.department_id}");
+                    }
+                    var finish = DateTime.Now;
+                    Log($"count = {i}");
+                    Log("EF6# start:{0} finish:{1} ({2})", start, finish, finish - start);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+            }
+        }
 
         /// <summary>
         /// レコード更新

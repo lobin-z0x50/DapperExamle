@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LocalDbExample"
         mc:Ignorable="d"
-        Title="Dapper+FastCrud Sample" Height="350" Width="825">
+        Title="Dapper+FastCrud Sample" Height="350" Width="1024">
     <DockPanel Margin="10">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" >
         <Button Padding="20,2" Content="1.接続" HorizontalAlignment="Left" Click="btnDbInfo_Click"/>
         <Button Padding="20,2" Content="2.テーブル作成" HorizontalAlignment="Left" Click="btnCreate_Click"/>
-        <Button Padding="20,2" Content="3.データ投入" HorizontalAlignment="Left" Click="btnInsert_Click"/>
-        <Button Padding="20,2" Content="4.レコード検索" HorizontalAlignment="Left" Click="btnSearch_Click"/>
+        <Button Padding="20,2" Content="3.大量データ投入" HorizontalAlignment="Left" Click="btnInsert_Click"/>
+        <Button Padding="20,2" Content="4-1.複数件検索" HorizontalAlignment="Left" Click="btnSearch_Click"/>
+        <Button Padding="20,2" Content="4-2.日本語検索" HorizontalAlignment="Left" Click="btnSearch2_Click"/>
         <Button Padding="20,2" Content="5.データ更新" HorizontalAlignment="Left" Click="btnUpdate_Click"/>
         <Button Padding="20,2" Content="6.データ削除" HorizontalAlignment="Left" Click="btnDelete_Click"/>
         <Button Padding="20,2" Content="7.テーブル削除" HorizontalAlignment="Left" Click="btnDrop_Click"/>
